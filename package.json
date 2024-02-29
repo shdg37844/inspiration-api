@@ -11,6 +11,7 @@
     "seed:run": "knex seed:run"
   },
   "dependencies": {
+    "@alicloud/pop-core": "^1.7.13",
     "axios": "^1.6.7",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
