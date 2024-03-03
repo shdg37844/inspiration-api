@@ -35,6 +35,17 @@ exports.up = function (knex) {
             table.integer('role_id', 11)
             table.integer('permission_id', 11)
         })
+        //灵感库收藏夹
+        .createTable('favorite', function (table) {
+            table.increments('id');
+            table.string('name', 255).unique();
+        })
+        //灵感库收藏夹图片
+        .createTable('fav-ins', function (table) {
+            table.increments('id');
+            table.integer('ins_id')
+            table.integer('fav_id')
+        })
 };
 
 exports.down = function (knex) {
