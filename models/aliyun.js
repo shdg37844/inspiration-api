@@ -1,5 +1,5 @@
-const Core = require('@alicloud/pop-core');
 require('dotenv').config()
+const Core = require('@alicloud/pop-core');
 
 const aliyun = {
     sms: function ({ PhoneNumbers, SignName, TemplateCode, TemplateParam }) {
@@ -26,11 +26,16 @@ const aliyun = {
         return new Promise((resolve, reject) => {
             client.request('SendSms', params, requestOption)
                 .then((result) => {
-                    resolve({ status: 1, data: result })
+                    if (result.Code === 'OK') {
+                        resolve({ status: 1, data: result });
+                    } else {
+                        reject({ status: 0, message: `发送失败，错误码：${result.Code}，错误消息：${result.Message}` });
+                    }
                 })
-                .catch((ex) => {
-                    resolve({ status: 0, data: ex.data })
-                })
+                .catch((error) => {
+                    // 技术性错误处理，例如网络问题等
+                    reject({ status: 0, message: `请求发送过程中出现错误：${error.message}` });
+                });
         })
     }
 }
