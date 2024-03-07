@@ -1,5 +1,6 @@
 require('dotenv').config()
 const Core = require('@alicloud/pop-core');
+const basicModel = require('./basicModel.js');
 
 const aliyun = {
     sms: function ({ PhoneNumbers, SignName, TemplateCode, TemplateParam }) {
@@ -40,4 +41,24 @@ const aliyun = {
     }
 }
 
-module.exports = aliyun;
+class verificationModel extends basicModel {
+    constructor(props = "verification") {
+        super(props);
+    }
+
+    findLatestByPhone(phone) {
+        return this.knex(this.table)
+            .where('phone', '=', phone)
+            .orderBy('created_at', 'desc')
+            .first();
+    }
+
+    deleteByPhone(phone) {
+        return this.knex(this.table)
+            .where('phone', '=', phone)
+            .del()
+    }
+}
+
+
+module.exports = { aliyun, verificationModel }

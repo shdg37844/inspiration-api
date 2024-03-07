@@ -3,10 +3,7 @@ exports.up = function (knex) {
         // 用户
         .createTable('users', function (table) {
             table.increments('id');
-            table.string('name', 255);
-            table.string('password', 255);
             table.string('phone', 255).unique();
-            table.string('email', 255).unique();
             table.timestamp('created_at').defaultTo(knex.fn.now());
             table.timestamp('visited_at').defaultTo(knex.fn.now());
         })
@@ -46,6 +43,14 @@ exports.up = function (knex) {
             table.integer('ins_id')
             table.integer('fav_id')
         })
+        //验证码
+        .createTable('verification', function (table) {
+            table.increments('id');
+            table.string('phone', 255).unique();
+            table.integer('code');
+            table.timestamp('created_at').defaultTo(knex.fn.now());  //创建时间
+            table.timestamp('expires_at').nullable();   //过期时间
+        })
 };
 
 exports.down = function (knex) {
@@ -55,7 +60,9 @@ exports.down = function (knex) {
         .dropTable("user_roles")
         .dropTable("permission_groups")
         .dropTable("permissions")
-        .dropTable("role_permissions");
+        .dropTable("role_permissions")
+        .dropTable("fav-ins")
+        .dropTable("favorite")
 };
 
 exports.config = { transaction: false };

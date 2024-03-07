@@ -4,6 +4,8 @@ const permissionController = require('./../controllers/permissions.js')
 const roleController = require('./../controllers/role.js')
 const classifyController = require('./../controllers/classify.js')
 const aliyunController = require('./../controllers/aliyun.js');
+const authController = require('./../controllers/auth.js');
+
 
 // 角色管理
 router.get('/role', roleController.index);
@@ -28,7 +30,8 @@ router.post('/aliyun-sms', aliyunController.send);
 router.post('/classify', classifyController.insertClassify);
 router.delete('/classify/:id', classifyController.deleteClassify);
 
-
+//后台登录
+router.post('/login', authController.login);
 
 
 module.exports = router;
