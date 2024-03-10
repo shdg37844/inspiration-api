@@ -63,6 +63,7 @@ exports.down = function (knex) {
         .dropTable("role_permissions")
         .dropTable("fav-ins")
         .dropTable("favorite")
+        .dropTable("verification")
 };
 
 exports.config = { transaction: false };

@@ -16,7 +16,7 @@ exports.seed = function (knex) {
         ]),
 
         knex('permissions').insert([
-            { id: 1, group_id: 1, slug: 'general-manager', name: '通用管理' },
+            { id: 1, group_id: 1, slug: 'inspiration-manager', name: '灵感图管理' },
             { id: 2, group_id: 2, slug: 'admin-manager', name: '管理员' },
         ]),
 

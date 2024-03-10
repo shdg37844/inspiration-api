@@ -41,7 +41,17 @@ const authController = {
                 expiresIn: '24h' // token有效期24小时
             });
 
-            res.json({ code: 1, data: { token: token }, message: '登录成功！' });
+            res.json({
+                code: 1, 
+                data: {
+                    token: token,
+                    userInfo: {
+                        id: user.id,
+                        phone: user.phone
+                    },
+                },
+                message: '登录成功！'
+            });
         } catch (e) {
             console.log('登录过程中出现错误：', e);
             res.json({ code: 0, message: '服务器错误', error: e.message });
