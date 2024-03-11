@@ -28,6 +28,25 @@ const userService = {
         const rolePermissions = await RolePermission.knex()
             .whereIn('role_id', roleIds)
         return rolePermissions
+    },
+    getUserPermissionSlug: async function (user_id) {
+        const roles = await UserRole.where({ user_id })
+        if (!roles.length) {
+            return false
+        }
+
+        const roleIds = roles.map(data => data.role_id)
+        const rolePermissions = await RolePermission.knex()
+            .whereIn('role_id', roleIds)
+            .select('permission_id')
+
+        const permissionIds = rolePermissions.map(data => data.permission_id)
+
+        const permissionSlug = await Permission.knex()
+            .whereIn('id', permissionIds)
+            .select('slug')
+
+        return permissionSlug.map(data => data.slug);
     }
 }
 
