@@ -29,7 +29,6 @@ const aliyunController = {
 
 
             if (smsResult.status === 1) {
-
                 // 检查是否已存在具有相同电话号码的验证码记录
                 const existingRecord = await Verification.where({ phone: sendPhone }).first();
 

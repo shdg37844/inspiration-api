@@ -12,6 +12,12 @@ class userModel extends basicModel {
             .first(); // 确保返回单个对象
     }
 
+    findById(user_id) {
+        return this.knex(this.table)
+            .select('id', user_id)
+            .first()
+    }
+
 }
 
 module.exports = new userModel();

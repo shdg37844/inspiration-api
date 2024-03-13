@@ -5,6 +5,7 @@ const roleController = require('./../controllers/role.js')
 const classifyController = require('./../controllers/classify.js')
 const aliyunController = require('./../controllers/aliyun.js');
 const authController = require('./../controllers/auth.js');
+const userController = require('./../controllers/user.js');
 const Auth = require('./../middlewares/auth.js')
 
 // 角色管理
@@ -33,7 +34,8 @@ router.delete('/classify/:id', Auth.isLogin, classifyController.deleteClassify);
 //后台登录
 router.post('/login', authController.login);
 
-
+//用户
+router.get('/users/user-info', Auth.isLogin, userController.getCurrentUser);
 
 
 module.exports = router;
