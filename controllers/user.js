@@ -1,4 +1,6 @@
 const User = require('./../models/user')
+const UserRole = require('./../models/user_role')
+const Role = require('./../models/role')
 const JWT = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -22,6 +24,30 @@ const userController = {
 
         } catch (error) {
             res.status(500).json({ code: 0, message: '获取用户信息失败', error: error.message });
+        }
+    },
+    getUsers: async function (req, res, next) {
+        try {
+            const usersResponse = await User.all();
+            const user_roleResponse = await UserRole.all();
+            const roleResponse = await Role.all();
+
+            const users = usersResponse.map(data => {
+                let relatedItem = user_roleResponse.find(item => item.user_id === data.id)
+                let roleItem = roleResponse.find(item => item.id === relatedItem.role_id)
+                let roleName = roleItem.name;
+
+                return {
+                    id: data.id,
+                    phone: data.phone,
+                    role: roleName
+                }
+
+            });
+
+            res.json({ code: 1, data: { users: users } })
+        } catch (error) {
+            res.status(500).json({ code: 0, message: '获取用户失败', error: error.message });
         }
     }
 }

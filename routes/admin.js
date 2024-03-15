@@ -36,6 +36,6 @@ router.post('/login', authController.login);
 
 //用户
 router.get('/users/user-info', Auth.isLogin, userController.getCurrentUser);
-
+router.get('/users', Auth.isLogin, userController.getUsers);
 
 module.exports = router;
