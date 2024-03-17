@@ -40,6 +40,7 @@ const userController = {
                 return {
                     id: data.id,
                     phone: data.phone,
+                    name:data.name,
                     role: roleName
                 }
 

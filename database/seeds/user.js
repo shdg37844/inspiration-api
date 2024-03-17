@@ -3,6 +3,7 @@ exports.seed = function (knex) {
         knex('users').insert([
             {
                 phone: '1234567890', 
+                name:'kazuki'
             },
         ]),
 

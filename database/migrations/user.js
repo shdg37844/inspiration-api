@@ -4,6 +4,7 @@ exports.up = function (knex) {
         .createTable('users', function (table) {
             table.increments('id');
             table.string('phone', 255).unique();
+            table.string('name', 255).unique();
             table.timestamp('created_at').defaultTo(knex.fn.now());
             table.timestamp('visited_at').defaultTo(knex.fn.now());
         })

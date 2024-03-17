@@ -44,9 +44,10 @@ const rolelController = {
     destroy: async function (req, res, next) {
         try {
             const id = req.params.id;
-            await Role.delete({ id });
-            await userRole.delete({ role_id: id })
-            await rolePermission.delete({ role_id: id })
+            console.log('删除的角色：',id)
+            await Role.delete(id);
+            await userRole.deleteById({ role_id: id })
+            await rolePermission.deleteById({ role_id: id })
             res.json({ error_code: 0, message: '删除成功' })
         } catch (e) {
             res.json({ error_code: 1, message: e.message })
