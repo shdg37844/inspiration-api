@@ -47,6 +47,13 @@ const userService = {
             .select('slug')
 
         return permissionSlug.map(data => data.slug);
+
+        //用多表查询的方法获得permissionSlug：
+        // const permissionSlugs = await Permission.knex('permissions')
+        //     .join('role_permissions', 'permissions.id', '=', 'role_permissions.permission_id')
+        //     .join('user_roles', 'role_permissions.role_id', '=', 'user_roles.role_id')
+        //     .where('user_roles.user_id', user_id)
+        //     .select('permissions.slug');
     }
 }
 

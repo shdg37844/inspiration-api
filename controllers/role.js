@@ -44,7 +44,7 @@ const rolelController = {
     destroy: async function (req, res, next) {
         try {
             const id = req.params.id;
-            console.log('删除的角色：',id)
+            console.log('删除的角色：', id)
             await Role.delete(id);
             await userRole.deleteById({ role_id: id })
             await rolePermission.deleteById({ role_id: id })
@@ -136,6 +136,15 @@ const rolelController = {
             res.json({ error_code: 1, message: e.message || e.errors })
         }
 
+    },
+    storeRolePermission: async function (req, res, next) {
+        const id = req.params.id;
+        const newData = req.body.submitData
+        try {
+            await rolePermission.insert(newData);
+        } catch(e) {
+            res.json({ error_code: 1, message: e.message || e.errors })
+        }
     }
 }
 

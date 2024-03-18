@@ -23,6 +23,7 @@ router.delete('/role/:id/users', Auth.isLogin, roleController.destoryUsers);
 router.get('/permissions', Auth.isLogin, permissionController.getCurrentUserPermissions);
 router.get('/role/:id/permissions', Auth.isLogin, roleController.getPermissions);
 router.put('/role/:id/permissions', Auth.isLogin, roleController.updatePermissions);
+router.post('/role/:id/permissions', Auth.isLogin, roleController.storeRolePermission)
 
 //阿里云短信sms
 router.post('/aliyun-sms', aliyunController.send);
