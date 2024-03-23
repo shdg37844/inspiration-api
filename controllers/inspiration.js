@@ -4,13 +4,22 @@ const inspirationController = {
     show: async function (req, res, next) {
         const selectedClassify = req.params.classify;
         try {
-            const inspiration = await Inspiration.select(selectedClassify)
+            const inspiration = await Inspiration.select(selectedClassify) 
             res.json({ error_code: 0, data: { inspiration: inspiration } })
         } catch (e) {
             res.json({ error_code: 1, message: e.message })
         }
     },
 
+    showPics: async function (req, res, next) {
+        try {
+            const images = await Inspiration.getImages()
+            res.json({ error_code: 0, data: { images } })
+            
+        } catch (e) {
+            res.json({ error_code: 1, message: e.message })
+        }
+    }
 }
 
 module.exports = inspirationController;

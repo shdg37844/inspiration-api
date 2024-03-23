@@ -14,7 +14,7 @@ class userModel extends basicModel {
 
     findById(user_id) {
         return this.knex(this.table)
-            .select('id', user_id)
+            .where('id', '=', user_id)
             .first()
     }
 

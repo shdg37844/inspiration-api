@@ -50,9 +50,6 @@ const aliyunController = {
             res.json({ code: 0, message: '服务器错误' });
         }
     },
-    verificationCode: async function (req, res, next) {
-
-    }
 }
 
 module.exports = aliyunController;

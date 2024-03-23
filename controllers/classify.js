@@ -3,8 +3,9 @@ const Classify = require('../models/classify')
 const ClassifyController = {
     show: async function (req, res, next) {
         try {
-            const classify = await Classify.all()
-            res.json({ error_code: 0, data: { classify: classify } })
+            const spaceClassify = await Classify.getSpaceClassify();
+            const styleClassify = await Classify.getStyleClassify();
+            res.json({ error_code: 0, data: { spaceClassify, styleClassify } })
         } catch (e) {
             res.json({ error_code: 1, message: e.message })
         }

@@ -140,9 +140,12 @@ const rolelController = {
     storeRolePermission: async function (req, res, next) {
         const id = req.params.id;
         const newData = req.body.submitData
+        console.log('iddd', id)
+        console.log('收到的newData', newData)
         try {
-            await rolePermission.insert(newData);
-        } catch(e) {
+            await rolePermission.insert(id, { newData });
+            res.json({ error_code: 0, message: '角色权限创建成功' })
+        } catch (e) {
             res.json({ error_code: 1, message: e.message || e.errors })
         }
     }
