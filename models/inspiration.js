@@ -10,6 +10,8 @@ class inspirationModel extends basicModel {
             .select('img_url')
             .limit(300)
     }
+
+
 }
 
 module.exports = new inspirationModel();

@@ -10,9 +10,11 @@ const favoriteController = {
         }
     },
     insertFavorite: async function (req, res, next) {
-        let favorite = req.body.favorite;
+        let name = req.body.name;
+        let description = req.body.description;
+
         try {
-            const insertFavoriteId = await Favorite.insert(favorite);
+            const insertFavoriteId = await Favorite.insert({ name, description });
             res.json({ code: 200, data: insertFavoriteId })
         } catch (e) {
             res.json({ code: 0, data: e })

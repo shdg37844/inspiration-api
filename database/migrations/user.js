@@ -37,6 +37,7 @@ exports.up = function (knex) {
         .createTable('favorite', function (table) {
             table.increments('id');
             table.string('name', 255).unique();
+            table.text('description');
         })
         //灵感库收藏夹图片
         .createTable('fav-ins', function (table) {
