@@ -19,7 +19,8 @@ router.get('/classify', classifyController.show)
 //灵感图
 router.get('/inspiration/classify', inspirationController.show)
 router.get('/inspiration/images', inspirationController.showPics)  //获得首页全部图片
-router.post('/inspiration/:id/images', inspirationController.showFavPics)  //获得收藏夹图片
+router.get('/inspiration/:id/images', inspirationController.showFavPics)  //获得收藏夹图片
+router.get('/InsFav', inspirationController.showFavInsBond)
 
 //灵感收藏夹
 router.get('/favorite', favoriteController.show)

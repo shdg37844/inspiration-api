@@ -1,5 +1,6 @@
 const Inspiration = require('../models/inspiration')
 const FavIns = require('../models/fav-ins')
+const Favorite = require('../models/favorite')
 
 const inspirationController = {
     show: async function (req, res, next) {
@@ -29,8 +30,20 @@ const inspirationController = {
                 .join('fav-ins', 'inspiration.id', '=', 'fav-ins.ins_id')
                 .where('fav-ins.fav_id', id)
                 .select('inspiration.img_url')
-            res.json({ error_code: 0, data: { img_urls } })
 
+            const selectedFav = await Favorite.findFavName(id)
+            const selectedFavName = selectedFav.name
+
+            res.json({ error_code: 0, data: { img_urls, selectedFavName } })
+
+        } catch (e) {
+            res.json({ error_code: 1, message: e.message })
+        }
+    },
+    showFavInsBond: async function (req, res, next) {
+        try {
+            const FavInsCount = await FavIns.countIns();
+            res.json({ error_code: 0, data: { FavInsCount } })
         } catch (e) {
             res.json({ error_code: 1, message: e.message })
         }
