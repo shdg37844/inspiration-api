@@ -7,9 +7,10 @@ class inspirationModel extends basicModel {
 
     getImages() {
         return this.knex(this.table)
-            .select('img_url')
+            .select('img_url', 'id', 'category_id')
             .limit(300)
     }
+
 
 
 }

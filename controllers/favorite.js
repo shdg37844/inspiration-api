@@ -19,7 +19,7 @@ const favoriteController = {
         } catch (e) {
             res.json({ code: 0, data: e })
         }
-    },
+    },          
     deleteFavorite: async function (req, res, next) {
         const id = req.params.id;
         try {
